@@ -18,8 +18,8 @@ O "ponto inicial" pode ser encontrado na pasta "modelo" dentro desse projeto
  - Tente sempre se desafiar e ir além do proposto, como você pode impressionar e ao mesmo tempo fazer o que foi proposto?
 
 # Plus
-Para aqueles que gostarem do desafio, vou deixar junto uma proposta de frontend que pode ser construído junto ao backend da aplicação. Para isso, basta seguir a tela proposta no Figma abaixo. Caso consigam fazer a tela e consigam "ligar" o backend com a API construída no backend, contará bastante para a avaliação do desafio.
-[Tela do figma em questão](https://www.figma.com/file/JIim8YBm6f1CgCvspyMXmL/Simple-to-do-list-(Community)?node-id=1%3A312&t=HOnC9sINCAnHkZAo-1).
+Para aqueles que gostarem do desafio, vou deixar junto uma proposta de frontend que pode ser construído junto ao backend da aplicação. Para isso, basta seguir a tela proposta abaixo. Caso consigam fazer a tela e consigam "ligar" o backend com a API construída no backend, contará bastante para a avaliação do desafio.
+![image](https://user-images.githubusercontent.com/36626531/234911058-a0ce4a99-5b31-4818-a9a9-9d29c002d17e.png)
 
 # Observação
 Para aqueles que terminarem o desafio até o dia *04/05*, iremos realizar uma avaliação dos mesmos e conduzir uma mentoria focada em pontos de melhoria.
