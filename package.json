@@ -1,0 +1,17 @@
+{
+  "name": "semana13",
+  "version": "1.0.0",
+  "description": "",
+  "main": "request.js",
+  "scripts": {
+    "server": "nodemon ./JS/index-modelo.js",
+    "dev": "nodemon request.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

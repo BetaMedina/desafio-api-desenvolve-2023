@@ -1,0 +1,168 @@
+body {
+  height: 100vh;
+  font-family: Rubik, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 38px;
+
+  background-color: #e5e5e5;
+}
+
+main {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroud {
+  width: 95%;
+  height: 90%;
+
+  position: absolute;
+  top: 0;
+  left: -417px;
+  z-index: -1;
+
+  background-color: #333333;
+  transform: skew(-40deg);
+}
+
+.card {
+  width: 400px;
+  height: fit-content;
+
+  border-radius: 16px;
+  box-shadow: 4px 4px 15px #333333b6;
+
+  padding: 48px;
+
+  background-color: #ffffff;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 24px;
+
+  margin-bottom: 20px;
+}
+
+.list__itens {
+  display: flex;
+}
+
+.container {
+  cursor: pointer;
+  flex-grow: 1;
+
+  display: flex;
+}
+
+/* ESCONDE O CHECKMARK PADRÃO DO NAVEGADOR */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+
+  margin: auto 10px auto 0;
+
+  border-radius: 5px;
+  border: 2px solid #303030;
+}
+
+.container:hover input~.checkmark {
+  background-color: #919191;
+}
+
+.container input:checked~.checkmark {
+  background-image: url("./SVG/check.svg");
+  background-size: 94%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-color: #2196F3;
+  border: 2px solid #2196F3;
+}
+
+.container input:checked~p {
+  text-decoration: line-through;
+}
+
+.container p {
+  flex-grow: 1;
+}
+
+.editar {
+  width: 24px;
+  height: 24px;
+
+  margin: auto 10px auto 0;
+}
+
+
+
+li button {
+  border: none;
+  background-color: #ffffff;
+  pointer-events: none;
+}
+
+.img__deletar {
+  width: 24px;
+  height: 24px;
+
+  margin: auto 0;
+}
+
+/* PARTE DO INPUT DE ADIÇÃO DE ITENS */
+.insert {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.input__insert {
+  flex-grow: 1;
+
+  padding: 0 10px;
+
+  font-family: sans-serif;
+  font-size: 15px;
+  line-height: 30px;
+
+
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px rgba(37, 37, 37, 0.116);
+}
+
+.input__insert:focus {
+  outline: none;
+  border: 1px solid #333333
+}
+
+.btn__insert {
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 15px;
+  padding: 5px 10px;
+
+  background-color: #ffffff;
+  border: 1.5px solid #333333;
+  border-radius: 8px;
+}
+
+
+/* PARTE DE ERROS */
+.error {
+  border: 1px solid #ff3e3e;
+}
