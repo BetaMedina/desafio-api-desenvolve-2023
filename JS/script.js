@@ -54,12 +54,6 @@ const updateList = (data) => {
 
   }).join("")
 
-
-  if (container.checked) {
-    console.log('ta marcado princesa')
-  } else (console.log('ainda nao marcou vacilão'))
-  // console.log(naoSei());
-
 }
 
 
@@ -109,6 +103,4 @@ window.onload = async () => {
   updateList(data)
 }
 
-
-
-
+container.addEventListener()
