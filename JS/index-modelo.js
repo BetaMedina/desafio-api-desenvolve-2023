@@ -1,7 +1,7 @@
 const { Console } = require('console');
 const http = require('http');
 const { constants } = require('http2')
-const tasks = [
+let tasks = [
   { id: 1, description: 'Barraca', status: true },
   { id: 2, description: 'Pederneira', status: false },
 ];
@@ -9,47 +9,43 @@ const tasks = [
 
 const ENDPOINT = '/tasks'
 
-const server = http.createServer((require, response) => {
-  const { method, url } = require;
+const server = http.createServer((request, response) => {
+  const { method, url } = request;
 
   response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (method === constants.HTTP2_METHOD_OPTIONS && url === ENDPOINT) {
-    // console.log("aksdas");
+  if (method === constants.HTTP2_METHOD_OPTIONS && url.startsWith(ENDPOINT)) {
     response.writeHead(200);
     response.end();
     return
 
   }
 
-
-
-
-
-  if (method === constants.HTTP2_METHOD_GET && url === ENDPOINT) {
+  if (method === constants.HTTP2_METHOD_GET && url.startsWith(ENDPOINT)) {
     //lista o todo List
     response.statusCode = 200;
     response.end(JSON.stringify(tasks));
+    return
   }
 
 
-  if (method === constants.HTTP2_METHOD_POST && url === ENDPOINT) {
+  if (method === constants.HTTP2_METHOD_POST && url.startsWith(ENDPOINT)) {
 
     let body = '';
-    require.on('data', (chunk) => {
+    request.on('data', (chunk) => {
       body += chunk.toString()
     });
 
-    require.on('end', () => {
+    request.on('end', () => {
       const { description, status } = JSON.parse(body);
 
-      const id = tasks[tasks.length - 1].id + 1
+      const id = !!tasks.lenght ? tasks[tasks.length - 1].id + 1 : 1
+      
       //cria um item do todo list
       tasks.push({ id, description, status })
-      console.log(tasks)
-
+      
       response.statusCode = 201
       response.end(JSON.stringify(tasks));
     });
@@ -57,34 +53,55 @@ const server = http.createServer((require, response) => {
   }
 
 
+  if (method === constants.HTTP2_METHOD_PUT && url.startsWith(ENDPOINT)) {
+    console.log(url)
+    const id = url.split('/')[2]
+    let body = '';
+    
+    request.on('data', (chunk) => {
+      body += chunk.toString()
+    });
 
+    request.on('end', () => {
+      const { description, status } = JSON.parse(body);
 
-  // if (request.method === "POST")
-  if (method === constants.HTTP2_METHOD_PUT && require.url.startsWith(ENDPOINT)) {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === parseInt(id)){
+          return {
+            id: task.id,
+            description: !!description ? description : task.description,
+            status: status === undefined ? task.status : status,
+          }
+        }
+        return task
+      })
 
-    const url = require.url.split(ENDPOINT, 1)
+      tasks = updatedTasks
 
-    return response.end('ALTERA ESSE INFERNO' + url);
+      response.statusCode = 200
+      response.end(JSON.stringify(tasks));
+    });
+    return
   }
 
+  
+  if (method === constants.HTTP2_METHOD_DELETE && url.startsWith(ENDPOINT)) {
+    
+    const id = url.split('/')[2]
+    
+    const updatedTasks = tasks.filter((task) => {
+      if (task.id !== parseInt(id)){
+        return task
+      }
+    })
 
+    tasks = updatedTasks
+    
+    response.statusCode = 200
+    response.end(JSON.stringify(tasks));
+    return
+  }
 
-
-  //   if (method === constants.HTTP2_METHOD_PUT && /^\/tasks\/\d+$/.test(url)) {
-  //     const id = parseInt(url.split('/').pop());
-  //     let body = '';
-  //     require.on('data', chunk => {
-  //       body += chunk.toString();
-  //     });
-  //     require.on('end', () => {
-  //       const { description, status } = JSON.parse(body);
-  //       //deve atualizar um item do todo list
-  //       response.end(JSON.stringify(tasks));
-  //     });
-  //   }
-  //   response.statusCode = 404;
-  //   response.end();
-  //   return;
 });
 
 

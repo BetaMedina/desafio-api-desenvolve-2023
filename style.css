@@ -16,6 +16,10 @@ main {
   justify-content: center;
 }
 
+.disabled {
+  display: none !important;
+}
+
 .backgroud {
   width: 95%;
   height: 90%;
@@ -60,7 +64,7 @@ h1 {
 }
 
 /* ESCONDE O CHECKMARK PADRÃO DO NAVEGADOR */
-.container input {
+.container .check {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -78,11 +82,11 @@ h1 {
   border: 2px solid #303030;
 }
 
-.container:hover input~.checkmark {
+.container:hover .check~.checkmark {
   background-color: #919191;
 }
 
-.container input:checked~.checkmark {
+.container .check:checked~.checkmark {
   background-image: url("./SVG/check.svg");
   background-size: 94%;
   background-repeat: no-repeat;
@@ -92,7 +96,7 @@ h1 {
   border: 2px solid #2196F3;
 }
 
-.container input:checked~p {
+.container .check:checked~p {
   text-decoration: line-through;
 }
 
@@ -100,18 +104,19 @@ h1 {
   flex-grow: 1;
 }
 
-.editar {
+.editar__img, .salvar__img {
+  cursor: pointer;
   width: 24px;
   height: 24px;
+} 
 
-  margin: auto 10px auto 0;
+.button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
-
-
-li button {
-  border: none;
-  background-color: #ffffff;
+.img__button {
   pointer-events: none;
 }
 
@@ -130,7 +135,7 @@ li button {
   margin-top: 20px;
 }
 
-.input__insert {
+.input {
   flex-grow: 1;
 
   padding: 0 10px;
@@ -142,10 +147,15 @@ li button {
 
   border: 1px solid #ffffff;
   border-radius: 5px;
+
+  height: 35px;
+}
+
+.input__insert {
   box-shadow: 1px 1px 5px 5px rgba(37, 37, 37, 0.116);
 }
 
-.input__insert:focus {
+.input, .input__insert:focus {
   outline: none;
   border: 1px solid #333333
 }
