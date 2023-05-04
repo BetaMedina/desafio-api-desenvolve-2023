@@ -41,11 +41,11 @@ const server = http.createServer((request, response) => {
     request.on('end', () => {
       const { description, status } = JSON.parse(body);
 
-      const id = !!tasks.lenght ? tasks[tasks.length - 1].id + 1 : 1
-      
+      const id = !tasks.lenght ? tasks[tasks.length - 1].id + 1 : 1
+
       //cria um item do todo list
       tasks.push({ id, description, status })
-      
+
       response.statusCode = 201
       response.end(JSON.stringify(tasks));
     });
@@ -54,10 +54,10 @@ const server = http.createServer((request, response) => {
 
 
   if (method === constants.HTTP2_METHOD_PUT && url.startsWith(ENDPOINT)) {
-    console.log(url)
+    // console.log(url)
     const id = url.split('/')[2]
     let body = '';
-    
+
     request.on('data', (chunk) => {
       body += chunk.toString()
     });
@@ -66,7 +66,7 @@ const server = http.createServer((request, response) => {
       const { description, status } = JSON.parse(body);
 
       const updatedTasks = tasks.map((task) => {
-        if (task.id === parseInt(id)){
+        if (task.id === parseInt(id)) {
           return {
             id: task.id,
             description: !!description ? description : task.description,
@@ -77,26 +77,28 @@ const server = http.createServer((request, response) => {
       })
 
       tasks = updatedTasks
-
+      console.log(tasks);
+      const testado = tasks.find(task => task.id === parseInt(id))
+      console.log('testado: ', testado);
       response.statusCode = 200
-      response.end(JSON.stringify(tasks));
+      response.end(JSON.stringify(testado));
     });
     return
   }
 
-  
+
   if (method === constants.HTTP2_METHOD_DELETE && url.startsWith(ENDPOINT)) {
-    
+
     const id = url.split('/')[2]
-    
+
     const updatedTasks = tasks.filter((task) => {
-      if (task.id !== parseInt(id)){
+      if (task.id !== parseInt(id)) {
         return task
       }
     })
 
     tasks = updatedTasks
-    
+
     response.statusCode = 200
     response.end(JSON.stringify(tasks));
     return

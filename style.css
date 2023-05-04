@@ -104,11 +104,12 @@ h1 {
   flex-grow: 1;
 }
 
-.editar__img, .salvar__img {
+.editar__img,
+.salvar__img {
   cursor: pointer;
   width: 24px;
   height: 24px;
-} 
+}
 
 .button {
   border: none;
@@ -120,7 +121,8 @@ h1 {
   pointer-events: none;
 }
 
-.img__deletar {
+.img__deletar,
+.img__cancel {
   width: 24px;
   height: 24px;
 
@@ -155,7 +157,9 @@ h1 {
   box-shadow: 1px 1px 5px 5px rgba(37, 37, 37, 0.116);
 }
 
-.input, .input__insert:focus {
+.input,
+.input__insert:focus {
+  width: 228px;
   outline: none;
   border: 1px solid #333333
 }
@@ -169,6 +173,12 @@ h1 {
   background-color: #ffffff;
   border: 1.5px solid #333333;
   border-radius: 8px;
+}
+
+.update {
+  display: flex;
+  gap: 5px;
+  /* flex-grow: 1; */
 }
 
 
