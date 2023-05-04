@@ -20,19 +20,17 @@ const server = http.createServer((request, response) => {
     response.writeHead(200);
     response.end();
     return
-
   }
 
   if (method === constants.HTTP2_METHOD_GET && url.startsWith(ENDPOINT)) {
     //lista o todo List
-    response.statusCode = 200;
+    response.statusCode = constants.HTTP_STATUS_OK;
     response.end(JSON.stringify(tasks));
     return
   }
 
 
   if (method === constants.HTTP2_METHOD_POST && url.startsWith(ENDPOINT)) {
-
     let body = '';
     request.on('data', (chunk) => {
       body += chunk.toString()
@@ -46,7 +44,7 @@ const server = http.createServer((request, response) => {
       //cria um item do todo list
       tasks.push({ id, description, status })
 
-      response.statusCode = 201
+      response.statusCode = constants.HTTP_STATUS_CREATED
       response.end(JSON.stringify(tasks));
     });
     return
@@ -54,7 +52,6 @@ const server = http.createServer((request, response) => {
 
 
   if (method === constants.HTTP2_METHOD_PUT && url.startsWith(ENDPOINT)) {
-    // console.log(url)
     const id = url.split('/')[2]
     let body = '';
 
@@ -70,7 +67,7 @@ const server = http.createServer((request, response) => {
           return {
             id: task.id,
             description: !!description ? description : task.description,
-            status: status === undefined ? task.status : status,
+            status: !status ? task.status : status,
           }
         }
         return task
@@ -79,8 +76,7 @@ const server = http.createServer((request, response) => {
       tasks = updatedTasks
       console.log(tasks);
       const testado = tasks.find(task => task.id === parseInt(id))
-      console.log('testado: ', testado);
-      response.statusCode = 200
+      response.statusCode = constants.HTTP_STATUS_OK
       response.end(JSON.stringify(testado));
     });
     return
@@ -99,13 +95,11 @@ const server = http.createServer((request, response) => {
 
     tasks = updatedTasks
 
-    response.statusCode = 200
+    response.statusCode = constants.HTTP_STATUS_OK
     response.end(JSON.stringify(tasks));
     return
   }
-
 });
-
 
 server.listen(3000, () => {
   console.log('Server listening on port 3000');

@@ -4,7 +4,6 @@ const formulario = document.querySelector('.insert')
 
 
 const api = async ({ method, body, id = '' }) => {
-
   const response = await fetch(`http://localhost:3000/tasks/${id}`, {
     method,
     body,
@@ -25,7 +24,6 @@ const apiPOST = async (description) => {
 }
 
 const apiPUT = async (id, description, status) => {
-
   const object = {
     status,
     description,
@@ -37,9 +35,11 @@ const apiDELETE = async (id) => {
   return await api({ method: "DELETE", id })
 }
 
+
+
+
 // IDENTIFICA ERRO NO INPUT DE ADIÇÃO ---
 const validationInput = (value) => {
-  console.log('value: ', value);
   if (!!value.trim()) {
     inputAdicao.classList.remove('error')
     return true
@@ -50,7 +50,7 @@ const validationInput = (value) => {
 }
 
 // FUNÇÃO QUE CRIA O LAYOUT DA LI ---
-const createLI = ({ id, description, status }) => {
+const createLi = ({ id, description, status }) => {
   // verifica status de concluida
   const checked = status ? "checked" : ""
 
@@ -72,12 +72,38 @@ const createLI = ({ id, description, status }) => {
 </li>`
 }
 
+const updateLi = ({ id, description, status }) => {
+  // verifica status de concluida
+  const checked = status ? "checked" : ""
+  const newLi = document.createElement("li")
+  newLi.setAttribute('class', `list__itens list__${id}`)
+  newLi.setAttribute('id', id)
+
+  newLi.innerHTML = `<label class="container">
+  <input type="checkbox" value=${id} ${checked} class='check'>
+  <span class="checkmark"></span>
+  <p>${description}</p>
+</label>
+<form class="update">
+  <label class="container disabled">
+    <input type="text" value=${description} class='input input__edit'>
+  </label>
+  <button type="button" class="button button__edit editar " value="${id}"><img class="img__button editar__img" src="./SVG/editar.svg"></button>
+  <button type="submit" class="button button__save salvar disabled" value="${id}"><img class="img__button salvar__img" src="./SVG/save.svg"></button>
+</form>
+<button class="button button__delet" value="${id}"><img class="img__button img__deletar" src="./SVG/delete.svg"></button>
+<button class="button button__cancel disabled" value="${id}"><img class="img__button img__cancel" src="./SVG/cancel.svg"></button>`
+
+  return newLi
+}
+
 // ATUALIZA A UL COM AS LI CRIADAS QUE FORAM PRO BACK ---
 const updateList = (data) => {
   const minhaUL = document.querySelector(".list")
+  console.log(data)
   minhaUL.innerHTML = data.map((item) => {
 
-    return createLI(item)
+    return createLi(item)
 
   }).join("")
   setEventEdit()
@@ -97,8 +123,16 @@ const setEventChange = () => {
       const id = event.target.value
       const returnPut = await apiPUT(id, '', isChecked)
 
-      // console.log(returnPut)
-      updateList(returnPut)
+      const ul = document.querySelector('.list')
+      const filho = ul.children[id - 1];
+
+      ul.replaceChild(updateLi(returnPut), filho)
+
+      setEventEdit()
+      setEventChange()
+      setEventDelete()
+      setEventSubmit()
+      setEventCancel()
     })
   })
 }
@@ -245,29 +279,4 @@ window.onload = async () => {
   console.log(data);
 
   updateList(data)
-}
-
-const updateLi = ({ id, description, status }) => {
-  // verifica status de concluida
-  const checked = status ? "checked" : ""
-  const newLi = document.createElement("li")
-  newLi.setAttribute('class', `list__itens list__${id}`)
-  newLi.setAttribute('id', id)
-
-  newLi.innerHTML = `<label class="container">
-  <input type="checkbox" value=${id} ${checked} class='check'>
-  <span class="checkmark"></span>
-  <p>${description}</p>
-</label>
-<form class="update">
-  <label class="container disabled">
-    <input type="text" value=${description} class='input input__edit'>
-  </label>
-  <button type="button" class="button button__edit editar " value="${id}"><img class="img__button editar__img" src="./SVG/editar.svg"></button>
-  <button type="submit" class="button button__save salvar disabled" value="${id}"><img class="img__button salvar__img" src="./SVG/save.svg"></button>
-</form>
-<button class="button button__delet" value="${id}"><img class="img__button img__deletar" src="./SVG/delete.svg"></button>
-<button class="button button__cancel disabled" value="${id}"><img class="img__button img__cancel" src="./SVG/cancel.svg"></button>`
-
-  return newLi
 }
