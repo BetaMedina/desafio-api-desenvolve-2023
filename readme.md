@@ -1,35 +1,18 @@
-# Guia
-Você foi contratado para desenvolver uma API de TodoList em Node.js, utilizando somente as ferramentas nativas da linguagem. A API deverá possuir três endpoints:
+# Projeto To Do List
 
-
-`/tasks` *(GET)*: este endpoint deve retornar todas as tarefas cadastradas na lista, com as informações de id, descrição e status.
-
-`/tasks` *(POST)*: este endpoint deve permitir a criação de uma nova tarefa na lista, recebendo como parâmetros o campo description (descrição da tarefa) e o campo status (status da tarefa, que pode ser "pendente" ou "concluída").
-
-`/tasks/:id` *(PUT)*: este endpoint deve permitir a atualização de uma tarefa existente na lista, identificada pelo parâmetro id, recebendo como parâmetros os campos description e status.
-
+### Sobre o Projeto
+Você foi contratado para desenvolver uma API de TodoList em Node.js, utilizando somente as ferramentas nativas da linguagem. 
 Para implementar a API, você deve utilizar apenas as ferramentas nativas do Node.js, sem o uso de bibliotecas de terceiros. Além disso, é importante que a API seja bem documentada e que utilize boas práticas de desenvolvimento, como tratamento de erros e validação de entradas.
 
-O "ponto inicial" pode ser encontrado na pasta "modelo" dentro desse projeto
+### O que foi concluído:
 
-# Pontos importantes
- - Apenas poderá ser utilizado ferramentas nativas do Nodejs.
- - Pensando na mentoria que tivemos no dia *13/04/2023* como podemos melhorar esse código ?
- - Tente sempre se desafiar e ir além do proposto, como você pode impressionar e ao mesmo tempo fazer o que foi proposto?
+- [x] `/tasks` *(GET)*: este endpoint deve retornar todas as tarefas cadastradas na lista, com as informações de id, descrição e status.
 
-# Plus
-Para aqueles que gostarem do desafio, vou deixar junto uma proposta de frontend que pode ser construído junto ao backend da aplicação. Para isso, basta seguir a tela proposta abaixo. Caso consigam fazer a tela e consigam "ligar" o backend com a API construída no backend, contará bastante para a avaliação do desafio.
-![image](https://user-images.githubusercontent.com/36626531/234911058-a0ce4a99-5b31-4818-a9a9-9d29c002d17e.png)
+- [x] `/tasks` *(POST)*: este endpoint deve permitir a criação de uma nova tarefa na lista, recebendo como parâmetros o campo description (descrição da tarefa) e o campo status (status da tarefa, que pode ser "pendente" ou "concluída").
 
-# Observação
-Para aqueles que terminarem o desafio até o dia *04/05*, iremos realizar uma avaliação dos mesmos e conduzir uma mentoria focada em pontos de melhoria.
+- [x] `/tasks/:id` *(PUT)*: este endpoint deve permitir a atualização de uma tarefa existente na lista, identificada pelo parâmetro id, recebendo como parâmetros os campos description e status.
 
-# Guias de ajuda
- - [Video "node sem framework"](https://www.youtube.com/watch?v=c39UfvCR-gk)
- - [O que é uma api](https://www.youtube.com/watch?v=5ezlxPqaOeY)
- - [O que é api²](https://www.youtube.com/watch?v=vGuqKIRWosk)
- - [Como usar o postman](https://www.youtube.com/watch?v=5S9mMBEtJK4)
- - [Códigos http](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status)
-
-Divirtam-se
-![](https://s2.glbimg.com/PFhN1ZWogqCHFlDt-8wk0SYhB_Y=/0x0:500x250/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_ba3db981e6d14e54bb84be31c923b00c/internal_photos/bs/2021/f/x/4qLTXwTYKdILzhTgZlgw/2018-01-08-tumblr-inline-mmg4b8jk391qz4rgp.gif)
+### O que ainda vou implementar:
+- [ ] Endpoint DELETE no backend
+- [ ] Refatorar melhorando a arquitetura do backend
+- [ ] Verificar o por que do erro quando separo as responsabilidades no frontend
