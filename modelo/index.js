@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
 
   const { method, url } = req;
 
-  // res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   // res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -22,6 +22,7 @@ const server = http.createServer((req, res) => {
   if (method === constants.HTTP2_METHOD_GET && url === ENDPOINT) {
     res.statusCode = 200;
     res.end(JSON.stringify(tasks));
+    return
   }
 
   if (method === constants.HTTP2_METHOD_POST && url === ENDPOINT) {
@@ -39,6 +40,7 @@ const server = http.createServer((req, res) => {
 
       .on('end', () => {
         res.end(JSON.stringify(tasks));
+        return
       });
   }
 
@@ -76,6 +78,7 @@ const server = http.createServer((req, res) => {
     }    
   }
 });
+
 server.listen(3000, () => {
   console.log('Server listening on port 3000');
 });

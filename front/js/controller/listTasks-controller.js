@@ -1,4 +1,4 @@
-import { toListTasks } from "../cliente-service"
+import { toListTasks } from "../cliente-service.js"
 
 const criaNovaLinha = (description, statusTask, id) =>  { 
     const linhaNovoCliente = document.createElement("ul")
