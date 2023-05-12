@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Desafio - To do List</title>
+</head>
+
+<body>
+    <header>
+        <h1>To Do List</h1>
+    </header>
+
+    <main>
+        <div class="content-add-task">
+            <input type="text" placeholder="Digite uma tarefa pendente..." id="input-add-task">
+            <button onclick="newTask()" class="btn-add-task">+</button>
+        </div>
+        <div class="card-todolist">
+            <ul class="to-do-list" id="to-do-list" data-todolist>
+                <!-- <li class="line-task" id="${id}">
+                    <p class="description-class">Teste</p>
+                    <button class="btn-check-task">X</button>
+                </li> -->
+            </ul>
+        </div>
+    </main>
+    <script type="module" src="./js/controller/listTasks-controller.js"></script>
+</body>
+</html>
